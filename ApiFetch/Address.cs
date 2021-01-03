@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Net.Http;
 using System;
+using System.Text;
 
 namespace ApiFetch
 {
@@ -35,6 +36,22 @@ namespace ApiFetch
 
         public string Gia { get; set; }
 
-                
+        public override string ToString()
+        {
+            StringBuilder print = new StringBuilder();
+            print.AppendLine();
+            print.AppendLine($"CEP: {Cep}");
+            print.AppendLine($"Logradouro: {Logradouro}");
+            print.AppendLine($"Complemento: {Complemento}");
+            print.AppendLine($"Bairro: {Bairro}");
+            print.AppendLine($"Localidade: {Localidade}");
+            print.AppendLine($"Uf: {Uf}");
+            print.AppendLine($"Unidade: {Unidade}");
+            print.AppendLine($"Ibge: {Ibge}");
+            print.AppendLine($"Gia: {Gia}");
+
+
+            return print.ToString();
+        }
     }
 }

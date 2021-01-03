@@ -9,25 +9,33 @@ namespace ApiFetch
     {
         static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            string cep = Console.ReadLine();
+            bool flag = true;
 
-            string baseUrl = "https://viacep.com.br";
-            try
+            while (flag)
             {
-                var cepClient = RestService.For<ICepApiService>(baseUrl);
+                Console.WriteLine("Olá! Digite o CEP para descobrir sua Localidade: ");
+                string cep = Console.ReadLine();
 
-                Console.WriteLine("Consultando os dados do Cep: " + cep);
+                string baseUrl = "https://viacep.com.br";
+                try
+                {
+                    var cepClient = RestService.For<ICepApiService>(baseUrl);
 
-                var address = await cepClient.GetAddressAsync(cep);
+                    Console.WriteLine("Consultando os dados do Cep: " + cep);
 
-                Console.WriteLine("Cidade: " + address.Localidade);
+                    var address = await cepClient.GetAddressAsync(cep);
+
+                    Console.WriteLine(address.ToString());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                
+                Console.WriteLine("Deseja Pesquisar outro CEP? (Digite sim ou Digite qualquer coisa para sair)");
+                flag = ("sim" == Console.ReadLine()) ? true : false;
+                Console.Clear();
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
         }
     }
 }
